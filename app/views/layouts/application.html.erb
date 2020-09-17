@@ -37,6 +37,19 @@
 
     <div class="container">
       <p id="notice"><%= notice %></p>
+      <% if @book.errors.any? %>
+        <div id="error_explanation">
+          <h2><strong>
+            <%= @book.errors.count %>errors prohibited this book from being saved:
+          </strong></h2>
+          <ul>
+            <% @book.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <%= yield %>
     </div>
 
