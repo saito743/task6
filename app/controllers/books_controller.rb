@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def show
     @books = Book.new
@@ -25,6 +24,11 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+      if @book.user == current_user
+        render "edit"
+      else
+        redirect_to books_path
+      end
   end
 
   def update
