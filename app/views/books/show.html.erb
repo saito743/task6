@@ -39,8 +39,15 @@
 					<table>
 						<% @book.book_comments.each do |comment| %>
 						<tr>
-							<td><%= comment.user.name %></td>
+							<td><%= attachment_image_tag(comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %><br>
+								<%= comment.user.name %>
+							</td>
 							<td><%= comment.comment %></td>
+							<td>
+								<% if current_user.id == comment.user_id %>
+								  <%= link_to "Delete", book_book_comment_path(comment.book, comment),class: "btn btn-danger", method: :delete %>
+								<% end %>
+							</td>
 						</t>
 						<% end %>
 					</table>
