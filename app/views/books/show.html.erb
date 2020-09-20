@@ -35,6 +35,20 @@
 							 <% end %>
 						<% end %>
 					</td>
+					<!-- コメント機能 -->
+					<table>
+						<% @book.book_comments.each do |comment| %>
+						<tr>
+							<td><%= comment.user.name %></td>
+							<td><%= comment.comment %></td>
+						</t>
+						<% end %>
+					</table>
+
+					<%= form_for [@book, @book_comment] do |f| %>
+						<%= f.text_area :comment %>
+						<%= f.submit "送信"%>
+					<% end %>
 
 					<% if @book.user == current_user %>
 					  <td><%= link_to "Edit", edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
