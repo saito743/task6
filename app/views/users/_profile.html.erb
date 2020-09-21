@@ -13,10 +13,18 @@
 	</tr>
 	<tr>
 		<th>Follows</th>
-		<th><%= user.following_user.count %></th>
+		<th>
+			<%= link_to user_follows_path(user) do %>
+				<%= user.following_user.count %>
+			<% end %>
+		</th>
 	</tr>
 		<th>Follower</th>
-		<th><%= user.follower_user.count %></th>
+		<th>
+			<%= link_to user_follower_path(user) do %>
+				<%= user.follower_user.count %>
+			<% end %>
+			</th>
 </table>
 <% if user != current_user %>
 <!-- フォロー機能 -->
