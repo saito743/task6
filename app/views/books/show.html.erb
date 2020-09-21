@@ -35,27 +35,9 @@
 							 <% end %>
 						<% end %>
 					</td>
-					<!-- コメント機能 -->
-					<table>
-						<% @book.book_comments.each do |comment| %>
-						<tr>
-							<td><%= attachment_image_tag(comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %><br>
-								<%= comment.user.name %>
-							</td>
-							<td><%= comment.comment %></td>
-							<td>
-								<% if current_user.id == comment.user_id %>
-								  <%= link_to "Delete", book_book_comment_path(comment.book, comment),class: "btn btn-danger", method: :delete %>
-								<% end %>
-							</td>
-						</t>
-						<% end %>
-					</table>
-
-					<%= form_for [@book, @book_comment] do |f| %>
-						<%= f.text_area :comment %>
-						<%= f.submit "送信"%>
-					<% end %>
+					<td>
+						コメント数：<%= @book.book_comments.count %>
+					</td>
 
 					<% if @book.user == current_user %>
 					  <td><%= link_to "Edit", edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
@@ -63,6 +45,28 @@
 					<% end %>
 				</tr>
 			</table>
+			<!-- コメント機能 -->
+			<table>
+				<% @book.book_comments.each do |comment| %>
+				  	<tr>
+						<td class="comment-item">
+							<%= attachment_image_tag(comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %><br>
+								<%= comment.user.name %>
+						</td>
+						<td class="comment-item"><%= comment.comment %></td>
+						<td class="comment-item">
+							<% if current_user.id == comment.user_id %>
+								<%= link_to "Delete", book_book_comment_path(comment.book, comment),class: "btn btn-danger", method: :delete %>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+			</table>
+
+					<%= form_for [@book, @book_comment] do |f| %>
+						<%= f.text_area :comment, class: "col-xs-12",rows:'5' %>
+						<%= f.submit "送信"%>
+					<% end %>
 
 	</div>
 </div>
