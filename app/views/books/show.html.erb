@@ -24,13 +24,13 @@
 					<td><%= link_to @book.title, book_path(@book) %></td>
 					<td><%= @book.body %></td>
 					<!-- いいね機能 -->
-					<td>
+					<td  id="follow-link-<%= @book.id %>">
 						<% if @book.favorited_by?(current_user) %>
-							 <%= link_to book_favorites_path(@book), method: :delete do %>
+							 <%= link_to book_favorites_path(@book), method: :delete,remote: true do %>
 							    <span class="fas fa-heart"><%= @book.favorites.count %></span>
 							 <% end %>
 						<% else %>
-							 <%= link_to book_favorites_path(@book), method: :post do %>
+							 <%= link_to book_favorites_path(@book), method: :post,remote: true do %>
 							    <span class="far fa-heart"><%= @book.favorites.count %></span>
 							 <% end %>
 						<% end %>
